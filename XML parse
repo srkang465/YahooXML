@@ -1,0 +1,21 @@
+import xml.etree.ElementTree as ET
+import os 
+
+file_name = 'yahoo.xml'
+full_file = os.path.abspath(os.path.join('XML Parsing', file_name))
+
+dom = ET.parse(full_file)
+
+sellerinfo = dom.findall('listing/seller_info')
+
+for item in sellerinfo:
+    sellern = item.find('seller_name').text
+    sellerr = item.find('seller_rating').text
+
+auctioninfo = dom.findall('listing/auction_info')
+   
+for item in auctioninfo:
+    currentb = item.find('current_bid').text
+    timel = item.find('time_left').text
+    
+    print('Usernamne: {}\n *rating: {} \n Current bid:{} [{}]'.format(sellern, sellerr, currentb, timel))
